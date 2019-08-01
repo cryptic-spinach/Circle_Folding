@@ -1,7 +1,7 @@
-var r = 250;
-var px = 0;
-var py = 150;
-var makeBubs = true;
+var r = 250; // Radius
+var px = 0; // x coord of focus
+var py = 150; // y coord of focus
+var makeBubs = true; //
 var bubbles = [];
 var theta = 0;
 var interval_track = 0;
@@ -17,8 +17,13 @@ function setup() {
 	translate(windowWidth/2, windowHeight/2);
 	rotate(Math.PI/2);
 	background(0);
+
+	button = createButton('Clear chord trails');
+	button.position(20, 20);
+	button.mousePressed(clearChordTrails);
+
 	slider = createSlider(0, Math.PI*2, 0, 0.04);
-	slider.position(20, 20);
+	slider.position(20, 100);
 }
 
 function draw() {
@@ -72,6 +77,6 @@ function draw() {
 }
 
 
-function mousePressed () {
+function clearChordTrails() {
 	background(0);
 }
