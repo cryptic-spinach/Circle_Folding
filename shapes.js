@@ -10,6 +10,8 @@ function purpleDot(x, y) {
 	ellipse(x, y, 7.5);
 }
 
+
+
 function chord(x1, y1, m, r) {
   var b = -m*x1 + y1;
   var d = Math.pow(m, 2) + 1;
