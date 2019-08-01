@@ -1,11 +1,12 @@
 var r = 250;
 var px = 0;
-var py = 200;
+var py = 150;
 var makeBubs = true;
 var bubbles = [];
 var theta = 0;
 var interval_track = 0;
-var theta_speed = 0.3;
+var chord_interval = 1;
+var theta_speed = 0.05;
 
 var midx_memory;
 var midy_memory;
@@ -16,8 +17,8 @@ function setup() {
 	translate(windowWidth/2, windowHeight/2);
 	rotate(Math.PI/2);
 	background(0);
-	// slider = createSlider(0, Math.PI*2, 0, 0.04);
-	// slider.position(20, 20);
+	slider = createSlider(0, Math.PI*2, 0, 0.04);
+	slider.position(20, 20);
 }
 
 function draw() {
@@ -52,7 +53,13 @@ function draw() {
 
 	greenCircle(0, 0);
 
-	chord(midx, midy, perpslope, r);
+	if (interval_track < chord_interval) {
+		interval_track += 1;
+	} else {
+		chord(midx, midy, perpslope, r);
+		interval_track = 0;
+	}
+
 
 	// bubbles[0].x = xcoord;
 	// bubbles[0].y = ycoord;
