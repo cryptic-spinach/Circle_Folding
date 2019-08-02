@@ -1,4 +1,3 @@
-let canvaspadding = 0;
 var r = 250; // Radius
 var px = 0; // x coord of focus
 var py = 150; // y coord of focus
@@ -12,7 +11,7 @@ var previous_theta;
 var manual = false;
 
 function setup() {
-	createCanvas(windowWidth - canvaspadding,windowHeight - canvaspadding);
+	createCanvas(windowWidth, windowHeight);
 	translate(windowWidth/2, windowHeight/2);
 	rotate(Math.PI * 2);
 	background(0);
@@ -28,11 +27,11 @@ function setup() {
 	slider = createSlider(0, Math.PI*2, 0, 0.04);
 	slider.position(20, 90);
 
-	// theta_text = createElement('p', 'Theta');
-	// theta_text.position(200, 55);
-	// theta_text.style('color', 'rgb(255, 255, 255)')
-	// theta_text.style('font-size', '28px');
-	// theta_text.style('font-family', 'Calibri')
+	theta_text = createElement('p', 'Theta');
+	theta_text.position(200, 55);
+	theta_text.style('color', 'rgb(255, 255, 255)')
+	theta_text.style('font-size', '28px');
+	theta_text.style('font-family', 'Calibri')
 }
 
 function draw() {
@@ -97,12 +96,14 @@ function autoChord(midx, midy, perpslope) {
 function toggle() {
 	if (manual == true) {
 		manual = false;
-	} else {
+		clear_button.removeAttribute('disabled');
+	} else if (manual == false) {
 		manual = true;
+		clear_button.attribute('disabled', 'true');
 	}
 }
 
 function windowResized() {
-  resizeCanvas(windowWidth - canvaspadding,windowHeight - canvaspadding);
+  resizeCanvas(windowWidth, windowHeight);
 	background(0);
 }
