@@ -97,9 +97,11 @@ function toggle() {
 	if (manual == true) {
 		manual = false;
 		clear_button.removeAttribute('disabled');
+		slider.attribute('disabled', 'true');
 	} else if (manual == false) {
 		manual = true;
 		clear_button.attribute('disabled', 'true');
+		slider.removeAttribute('disabled');
 	}
 }
 
