@@ -42,4 +42,9 @@ class Bubble {
     fill(255,165,0, this.brightness);
     ellipse(this.x, this.y, this.r);
   }
+
+  hide() {
+    noStroke();
+    fill(0, 0, 0, 0)
+  }
 }
