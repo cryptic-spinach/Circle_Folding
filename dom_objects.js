@@ -21,6 +21,9 @@ function dom_init() {
 
   slider = createSlider(0, Math.PI*2, 0, 0.04);
   slider.position(20, 85);
+  slider.style('-webkit-appearance', 'none');
+  slider.style('background-color', 'rgb(80,80,80)');
+  slider.style('border-radius', '5px');
 
   theta_text = createElement('p', 'Theta');
   theta_text.position(200, 50);
