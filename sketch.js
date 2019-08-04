@@ -47,6 +47,7 @@ function draw() {
 
 	} else {
 		theta += theta_speed;
+		slider.value(theta % (2 * Math.PI));
 		autoChord(midx, midy, perpslope)
 		bubbles[0].hide();
 		bubbles[1].hide();
