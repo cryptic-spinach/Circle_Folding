@@ -9,6 +9,7 @@ var chord_interval = 1;
 var theta_speed = 0.05;
 var manual = true;
 
+
 function setup() {
 	dom_init();
 }
@@ -32,8 +33,23 @@ function draw() {
 
 	if (manual) {
 		clearChordTrails();
-		theta = slider.value();
 		chord(midx, midy, perpslope, r);
+
+		updateCoordinates(theta);
+		theta_slider.setValue(theta);
+
+		if (keyIsDown(LEFT_ARROW)) {
+			theta += 0.04;
+			theta_slider.setValue(theta);
+		}
+		if (keyIsDown(RIGHT_ARROW)) {
+			theta -= 0.04;
+			theta_slider.setValue(theta);
+		}
+
+		greenCircle(0, 0);
+		purpleDot(0, 0);
+		purpleDot(px, py);
 
 		updateCoordinates(theta);
 
@@ -47,15 +63,15 @@ function draw() {
 
 	} else {
 		theta += theta_speed;
-		slider.value(theta % (2 * Math.PI));
+		theta = theta % (Math.PI * 2)
 		autoChord(midx, midy, perpslope)
+		greenCircle(0, 0);
+		purpleDot(0, 0);
+		purpleDot(px, py);
 		bubbles[0].hide();
 		bubbles[1].hide();
 	}
 
-	greenCircle(0, 0);
-	purpleDot(0, 0);
-	purpleDot(px, py);
 
 }
 
@@ -73,21 +89,7 @@ function autoChord(midx, midy, perpslope) {
 	}
 }
 
-function toggle() {
-	if (manual == true) {
-		// Switch to auto mode
-		clearChordTrails();
-		manual = false;
-		clear_button.removeAttribute('disabled');
-		slider.attribute('disabled', 'true');
-	} else if (manual == false) {
-		// Switch to manual mode
-		clearChordTrails();
-		manual = true;
-		clear_button.attribute('disabled', 'true');
-		slider.removeAttribute('disabled');
-	}
-}
+
 
 function windowResized() {
 	// Responsive design

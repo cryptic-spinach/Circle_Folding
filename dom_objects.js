@@ -4,21 +4,43 @@ function dom_init() {
   rotate(Math.PI * 2);
   background(0);
 
-  clear_button = createButton('Clear chord trails');
-  clear_button.position(20, 20);
-  clear_button.mousePressed(clearChordTrails);
-  clear_button.attribute('disabled', 'true');
+  // Implement GUI controls
+  text_boi = new Controls();
+  gui = new dat.GUI();
 
-  toggle_button = createButton('Auto/Manual toggle');
-  toggle_button.position(20, 50);
-  toggle_button.mousePressed(toggle);
+  toggle_button = gui.add(text_boi, 'AutoManualToggle').name('Switch to Auto');
 
-  slider = createSlider(0, Math.PI*2, 0, 0.04);
-  slider.position(20, 85);
+  theta_slider = gui.add(text_boi, 'Theta', 0, 2 * Math.PI);
+  theta_slider.onChange(function(value) {
+    theta = value;
+  }
 
-  theta_text = createElement('p', 'Theta');
-  theta_text.position(200, 50);
-  theta_text.style('color', 'rgb(255, 255, 255)')
-  theta_text.style('font-size', '28px');
-  theta_text.style('font-family', 'Calibri');
+)
+
 }
+
+Controls = function() {
+	this.Theta = 0;
+  this.clearTrails = function() {
+    clearChordTrails();
+  }
+  this.AutoManualToggle = function() {
+		if (manual == true) {
+      clearChordTrails();
+			manual = false;
+			toggle_button.name('Switch to Manual');
+			gui.remove(theta_slider);
+      clear_button = gui.add(text_boi, 'clearTrails').name('Clear Chord Trails');
+		} else if (manual == false) {
+      clearChordTrails();
+			manual = true;
+			toggle_button.name('Switch to Auto');
+      gui.remove(clear_button)
+			theta_slider = gui.add(text_boi, 'Theta', 0, Math.PI * 2);
+			theta_slider.setValue(theta % (2 * Math.PI));
+			theta_slider.onChange(function(value) {
+				theta = value;
+			});
+		}
+	}
+};
