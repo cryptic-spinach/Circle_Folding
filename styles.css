@@ -1,0 +1,13 @@
+body {
+		height: 400px;
+	  align-items: center;
+	  background-color: #ccc;
+	  display: flex;
+	  justify-content: center;
+	  margin: 0;
+	}
+
+	canvas {
+		margin:auto;
+		overflow: hidden;
+	}
