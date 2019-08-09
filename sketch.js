@@ -10,6 +10,7 @@ var theta_speed = 0.05;
 var manual = true;
 
 
+
 function setup() {
 	dom_init();
 }
@@ -28,6 +29,7 @@ function draw() {
 	}
 
 	var perpslope = -(px - xcoord)/(py - ycoord);
+	var slope = (ycoord)/(xcoord);
 
 	makeBubs = false;
 
@@ -39,17 +41,30 @@ function draw() {
 		theta_slider.setValue(theta);
 
 		if (keyIsDown(LEFT_ARROW)) {
-			theta += 0.04;
+			theta += 0.02;
 			theta_slider.setValue(theta);
 		}
 		if (keyIsDown(RIGHT_ARROW)) {
-			theta -= 0.04;
+			theta -= 0.02;
 			theta_slider.setValue(theta);
 		}
 
+
+
 		greenCircle(0, 0);
-		purpleDot(0, 0);
+		greyLine(px, py, midx, midy);
+		greyLine(0, 0, xcoord, ycoord);
+		greyLine(px, py, xcoord, ycoord);
+		greyLine(0, 0, px, py);
+
+
+		var c = (py * (xcoord - midx) / (xcoord - px));
+		// purpleDot(midx, py - c)
+
+
+		purpleDot(0, 0)
 		purpleDot(px, py);
+
 
 		updateCoordinates(theta);
 
@@ -71,7 +86,6 @@ function draw() {
 		bubbles[0].hide();
 		bubbles[1].hide();
 	}
-
 
 }
 

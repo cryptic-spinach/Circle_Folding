@@ -10,6 +10,17 @@ function purpleDot(x, y) {
 	ellipse(x, y, 7.5);
 }
 
+// function redLine(x1, y1, x2, y2) {
+//   stroke(255,0,0);
+//   line(x1, y1, x2, y2)
+// }
+
+function greyLine(x1, y1, x2, y2) {
+  stroke(180);
+  line(x1, y1, x2, y2)
+}
+
+
 function chord(x1, y1, m, r) {
   var b = -m*x1 + y1;
   var d = Math.pow(m, 2) + 1;
