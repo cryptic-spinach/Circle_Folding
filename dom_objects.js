@@ -13,9 +13,7 @@ function dom_init() {
   theta_slider = gui.add(text_boi, 'Theta', 0, 2 * Math.PI);
   theta_slider.onChange(function(value) {
     theta = value;
-  }
-
-)
+  });
 
 }
 
@@ -35,7 +33,7 @@ Controls = function() {
       clearChordTrails();
 			manual = true;
 			toggle_button.name('Switch to Auto');
-      gui.remove(clear_button)
+      gui.remove(clear_button);
 			theta_slider = gui.add(text_boi, 'Theta', 0, Math.PI * 2);
 			theta_slider.setValue(theta % (2 * Math.PI));
 			theta_slider.onChange(function(value) {
@@ -43,4 +41,4 @@ Controls = function() {
 			});
 		}
 	}
-};
+}

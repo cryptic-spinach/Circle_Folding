@@ -1,15 +1,13 @@
-var r = 250; // Radius
-var px = 0; // x coord of focus
-var py = 150; // y coord of focus
-var makeBubs = true; // used to initiate bubbles
-var bubbles = []; // used to initiate bubbles
-var theta = 0; // position of bubble on the circle
+var r = 250;
+var px = 0;
+var py = 150;
+var makeBubs = true;
+var bubbles = [];
+var theta = 0;
 var interval_track = 0;
 var chord_interval = 1;
 var theta_speed = 0.05;
 var manual = true;
-
-
 
 function setup() {
 	dom_init();
@@ -17,7 +15,6 @@ function setup() {
 
 function draw() {
 	translate(windowWidth/2, windowHeight/2);
-	rotate(Math.PI * 2);
 
 	updateCoordinates(theta);
 
@@ -29,14 +26,12 @@ function draw() {
 	}
 
 	var perpslope = -(px - xcoord)/(py - ycoord);
-	var slope = (ycoord)/(xcoord);
 
 	makeBubs = false;
 
 	if (manual) {
 		clearChordTrails();
 		chord(midx, midy, perpslope, r);
-
 		updateCoordinates(theta);
 		theta_slider.setValue(theta);
 
@@ -49,24 +44,9 @@ function draw() {
 			theta_slider.setValue(theta);
 		}
 
-
+		updateCoordinates(theta);
 
 		greenCircle(0, 0);
-		greyLine(px, py, midx, midy);
-		greyLine(0, 0, xcoord, ycoord);
-		greyLine(px, py, xcoord, ycoord);
-		greyLine(0, 0, px, py);
-
-
-		var c = (py * (xcoord - midx) / (xcoord - px));
-		// purpleDot(midx, py - c)
-
-
-		purpleDot(0, 0)
-		purpleDot(px, py);
-
-
-		updateCoordinates(theta);
 
 		bubbles[0].x = xcoord;
 		bubbles[0].y = ycoord;
@@ -76,10 +56,18 @@ function draw() {
 		bubbles[1].y = midy;
 		bubbles[1].show();
 
+		greyLine(px, py, midx, midy);
+		greyLine(0, 0, xcoord, ycoord);
+		greyLine(px, py, xcoord, ycoord);
+		greyLine(0, 0, px, py);
+		chord(0, 0, perpslope, r);
+		purpleDot(0, 0);
+		purpleDot(px, py);
+
 	} else {
 		theta += theta_speed;
-		theta = theta % (Math.PI * 2)
-		autoChord(midx, midy, perpslope)
+		theta = theta % (Math.PI * 2);
+		autoChord(midx, midy, perpslope);
 		greenCircle(0, 0);
 		purpleDot(0, 0);
 		purpleDot(px, py);
@@ -94,7 +82,6 @@ function clearChordTrails() {
 }
 
 function autoChord(midx, midy, perpslope) {
-	// Chord trail spacing control
 	if (interval_track < chord_interval) {
 		interval_track += 1;
 	} else {
@@ -103,10 +90,7 @@ function autoChord(midx, midy, perpslope) {
 	}
 }
 
-
-
 function windowResized() {
-	// Responsive design
   resizeCanvas(windowWidth, windowHeight);
 	background(0);
 }
