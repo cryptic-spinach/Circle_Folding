@@ -60,7 +60,7 @@ function draw() {
 		greyLine(0, 0, xcoord, ycoord);
 		greyLine(px, py, xcoord, ycoord);
 		greyLine(0, 0, px, py);
-		chord(0, 0, perpslope, r);
+		// chord(0, 0, perpslope, r);
 		purpleDot(0, 0);
 		purpleDot(px, py);
 
