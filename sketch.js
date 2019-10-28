@@ -3,11 +3,18 @@ var px = 0;
 var py = 150;
 var makeBubs = true;
 var bubbles = [];
-var theta = 0;
+var theta = 2;
 var interval_track = 0;
 var chord_interval = 1;
 var theta_speed = 0.05;
 var manual = true;
+var phi;
+var newX;
+var m2;
+var newY;
+var tempX, tempY;
+var sigInput = 0;
+var sigOutput;
 
 function setup() {
 	dom_init();
@@ -21,8 +28,10 @@ function draw() {
 	if (makeBubs == true) {
 		var b1 = new Bubble(xcoord, ycoord, 8.5);
 		var b2 = new Bubble(midx, midy, 8.5);
+		var b3 = new Bubble(0, 0, 8.5);
 		bubbles.push(b1);
 		bubbles.push(b2);
+		bubbles.push(b3);
 	}
 
 	var perpslope = -(px - xcoord)/(py - ycoord);
@@ -56,13 +65,40 @@ function draw() {
 		bubbles[1].y = midy;
 		bubbles[1].show();
 
-		greyLine(px, py, midx, midy);
-		greyLine(0, 0, xcoord, ycoord);
-		greyLine(px, py, xcoord, ycoord);
-		greyLine(0, 0, px, py);
+		m2 = ycoord/xcoord;
+		newX = (perpslope * midx - midy)/(perpslope - m2);
+		newY = perpslope * (newX - midx) + midy;
+		if (theta < Math.PI) {
+			phi = Math.atan(dist(xcoord, ycoord, midx, midy)/dist(newX, newY, midx, midy));
+		} else {
+			phi = -Math.atan(dist(xcoord, ycoord, midx, midy)/dist(newX, newY, midx, midy));
+		}
+		tempX = xcoord - newX;
+		tempY = ycoord - newY;
+
+		if (sigInput <= 100) {
+			sigInput += 1;
+			sigOutput = moveDot(sigInput, 5, -0.1, 2 * phi);
+		}
+
+		translate(newX, newY);
+		rotate(sigOutput);
+		greyLine(0, 0, tempX, tempY);
+		rotate(-sigOutput);
+		translate(-newX, -newY);
+
+		bubbles[2].x = newX;
+		bubbles[2].y = newY;
+		bubbles[2].show();
+
+
+		// greyLine(px, py, midx, midy);
+		// greyLine(0, 0, xcoord, ycoord);
+		// greyLine(px, py, xcoord, ycoord);
+		// greyLine(0, 0, px, py);
 		// chord(0, 0, perpslope, r);
 		purpleDot(0, 0);
-		purpleDot(px, py);
+		orangeDot(px, py);
 
 	} else {
 		theta += theta_speed;
