@@ -1,3 +1,11 @@
+function rotateBoi() {
+  translate(newX, newY);
+  rotate(sigOutput);
+  greyLine(0, 0, tempX, tempY);
+  rotate(-sigOutput);
+  translate(-newX, -newY);
+}
+
 function greenCircle(x, y) {
   stroke(0, 128, 0);
   fill(0, 0, 0, 0);
