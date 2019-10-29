@@ -8,7 +8,7 @@ function dom_init() {
   text_boi = new Controls();
   gui = new dat.GUI();
 
-  toggle_button = gui.add(text_boi, 'AutoManualToggle').name('Switch to Auto');
+  toggle_button = gui.add(text_boi, 'AutoManualToggle').name('Switch to Auto mode');
   rotate_button = gui.add(text_boi, 'RotateToggle').name('Switch to radius view');
 
   theta_slider = gui.add(text_boi, 'Theta', 0, 2 * Math.PI);
@@ -23,10 +23,10 @@ Controls = function() {
   this.RotateToggle = function() {
     if (fociMode == false) {
       fociMode = true;
-      rotate_button.name("Switch to foci view");
+      rotate_button.name("Switch to Foci View");
     } else if (fociMode == true) {
       fociMode = false;
-      rotate_button.name("Switch to radius view");
+      rotate_button.name("Switch to Radius View");
     }
   }
   this.clearTrails = function() {
@@ -36,14 +36,14 @@ Controls = function() {
 		if (manual == true) {
       clearChordTrails();
 			manual = false;
-			toggle_button.name('Switch to Manual');
+			toggle_button.name('Switch to Manual Mode');
 			gui.remove(theta_slider);
       gui.remove(rotate_button);
       clear_button = gui.add(text_boi, 'clearTrails').name('Clear Chord Trails');
 		} else if (manual == false) {
       clearChordTrails();
 			manual = true;
-			toggle_button.name('Switch to Auto');
+			toggle_button.name('Switch to Auto Mode');
       gui.remove(clear_button);
 			theta_slider = gui.add(text_boi, 'Theta', 0, Math.PI * 2);
 			theta_slider.setValue(theta % (2 * Math.PI));
@@ -51,9 +51,9 @@ Controls = function() {
 				theta = value;
 			});
       if (fociMode == true) {
-        rotate_button = gui.add(text_boi, 'RotateToggle').name('Switch to foci view');
+        rotate_button = gui.add(text_boi, 'RotateToggle').name('Switch to Foci View');
       } else if (fociMode == false) {
-        rotate_button = gui.add(text_boi, 'RotateToggle').name('Switch to radius view');
+        rotate_button = gui.add(text_boi, 'RotateToggle').name('Switch to Radius View');
       }
 
 		}
