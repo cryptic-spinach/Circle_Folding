@@ -23,7 +23,6 @@ function setup() {
 
 function draw() {
 	translate(windowWidth/2, windowHeight/2);
-
 	updateCoordinates(theta);
 
 	if (makeBubs == true) {
@@ -97,17 +96,10 @@ function draw() {
 			}
 		}
 
-
 		bubbles[2].x = newX;
 		bubbles[2].y = newY;
 		bubbles[2].show();
 
-
-		// greyLine(px, py, midx, midy);
-		// greyLine(0, 0, xcoord, ycoord);
-		// greyLine(px, py, xcoord, ycoord);
-		// greyLine(0, 0, px, py);
-		// chord(0, 0, perpslope, r);
 		greyLine(0, 0, newX, newY);
 		purpleDot(0, 0);
 		orangeDot(px, py);
