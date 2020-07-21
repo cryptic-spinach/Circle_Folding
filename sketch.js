@@ -16,6 +16,7 @@ var tempX, tempY;
 var sigInput = 0;
 var sigOutput;
 var fociMode = false;
+var perpslope;
 
 function setup() {
 	dom_init();
@@ -34,7 +35,7 @@ function draw() {
 		bubbles.push(b3);
 	}
 
-	var perpslope = -(px - xcoord)/(py - ycoord);
+	perpslope = -(px - xcoord)/(py - ycoord);
 
 	makeBubs = false;
 
@@ -133,11 +134,4 @@ function autoChord(midx, midy, perpslope) {
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 	background(0);
-}
-
-function updateCoordinates(theta) {
-	xcoord = r * Math.sin(theta);
-	ycoord = r * Math.cos(theta);
-	midx = (xcoord + px)/2;
-	midy = (ycoord + py)/2;
 }

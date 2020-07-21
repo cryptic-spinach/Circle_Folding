@@ -24,10 +24,6 @@ function orangeDot(x, y) {
   ellipse(x, y, 7.5);
 }
 
-function moveDot(x, a, b, k) {
-	var sigmoid =  k / (1 + Math.pow(Math.E, a + b*x));
-	return sigmoid;
-}
 
 
 function greyLine(x1, y1, x2, y2) {
