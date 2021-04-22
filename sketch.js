@@ -1,17 +1,17 @@
 var r = 250;
-var px = 0;
-var py = 150;
+var focus_X = 0;
+var focus_Y = 150;
 var makeBubs = true;
 var bubbles = [];
-var theta = 2;
+var theta = 0.01;
 var interval_track = 0;
 var chord_interval = 1;
 var theta_speed = 0.05;
 var manual = true;
 var phi;
 var newX;
-var m2;
 var newY;
+var m2;
 var tempX, tempY;
 var sigInput = 0;
 var sigOutput;
@@ -35,7 +35,7 @@ function draw() {
 		bubbles.push(b3);
 	}
 
-	perpslope = -(px - xcoord)/(py - ycoord);
+	perpslope = -(focus_X - xcoord)/(focus_Y - ycoord);
 
 	makeBubs = false;
 
@@ -43,15 +43,16 @@ function draw() {
 		clearChordTrails();
 		chord(midx, midy, perpslope, r);
 		updateCoordinates(theta);
-		theta_slider.setValue(theta);
+		// theta_slider.setValue(theta);
 
 		if (keyIsDown(LEFT_ARROW)) {
 			theta += 0.02;
-			theta_slider.setValue(theta);
+			console.log(theta)
+			// theta_slider.setValue(theta);
 		}
 		if (keyIsDown(RIGHT_ARROW)) {
 			theta -= 0.02;
-			theta_slider.setValue(theta);
+			// theta_slider.setValue(theta);
 		}
 
 		updateCoordinates(theta);
@@ -79,18 +80,19 @@ function draw() {
 		tempX = xcoord - newX;
 		tempY = ycoord - newY;
 
+		// This conrols the animation when you click "Switch to Foci View or Switch to Radius View"
 		if (fociMode == false){
 			if (sigInput <= 100) {
 				sigInput += 1;
-				sigOutput = moveDot(sigInput, 5, -0.1, 2 * phi);
+				sigOutput = moveLine(sigInput, 5, -0.1, 2 * phi);
 				rotateBoi();
 			} else {
-				greyLine(px, py, newX, newY)
+				greyLine(focus_X, focus_Y, newX, newY)
 			}
 		} else {
 			if (sigInput >= 0) {
 				sigInput -= 1;
-				sigOutput = moveDot(sigInput, 5, -0.1, 2 * phi);
+				sigOutput = moveLine(sigInput, 5, -0.1, 2 * phi);
 				rotateBoi();
 			} else {
 				greyLine(0, 0, xcoord, ycoord);
@@ -103,15 +105,15 @@ function draw() {
 
 		greyLine(0, 0, newX, newY);
 		purpleDot(0, 0);
-		orangeDot(px, py);
+		orangeDot(focus_X, focus_Y);
 
-	} else {
+	} else { // Auto mode
 		theta += theta_speed;
-		theta = theta % (Math.PI * 2);
+		theta = theta;
 		autoChord(midx, midy, perpslope);
 		greenCircle(0, 0);
 		purpleDot(0, 0);
-		purpleDot(px, py);
+		purpleDot(focus_X, focus_Y);
 		bubbles[0].hide();
 		bubbles[1].hide();
 	}
