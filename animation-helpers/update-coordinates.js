@@ -1,7 +1,6 @@
 function updateCoordinates(theta) {
-	xcoord = r * Math.sin(theta);
-	ycoord = r * Math.cos(theta);
-	midx = (xcoord + focus_X)/2;
-	midy = (ycoord + focus_Y)/2;
-	//theta = theta % (Math.PI * 2);
+	onCircle_X = r * Math.sin(theta);
+	onCircle_Y = r * Math.cos(theta);
+	midx = (onCircle_X + focus_X)/2;
+	midy = (onCircle_Y + focus_Y)/2;
 }

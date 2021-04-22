@@ -1,8 +1,14 @@
 function rotateBoi() {
+  var tempSigOutput = sigOutput;
+  
+  if (theta < 0 || theta > 2 * Math.PI ) {
+    tempSigOutput *= -1
+  }
+
   translate(newX, newY);
-  rotate(sigOutput);
+  rotate(tempSigOutput);
   greyLine(0, 0, tempX, tempY);
-  rotate(-sigOutput);
+  rotate(-tempSigOutput);
   translate(-newX, -newY);
 }
 

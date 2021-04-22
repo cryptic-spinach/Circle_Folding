@@ -4,14 +4,15 @@ var focus_Y = 150;
 var makeBubs = true;
 var bubbles = [];
 var theta = 0.01;
+var onCircle_X = r * Math.sin(theta);
+var onCircle_Y = r * Math.cos(theta);
 var interval_track = 0;
 var chord_interval = 1;
 var theta_speed = 0.05;
 var manual = true;
 var phi;
-var newX;
-var newY;
-var m2;
+var radius_slope;
+var newX, newY;
 var tempX, tempY;
 var sigInput = 0;
 var sigOutput;
@@ -27,7 +28,7 @@ function draw() {
 	updateCoordinates(theta);
 
 	if (makeBubs == true) {
-		var b1 = new Bubble(xcoord, ycoord, 8.5);
+		var b1 = new Bubble(onCircle_X, onCircle_Y, 8.5);
 		var b2 = new Bubble(midx, midy, 8.5);
 		var b3 = new Bubble(0, 0, 8.5);
 		bubbles.push(b1);
@@ -35,7 +36,7 @@ function draw() {
 		bubbles.push(b3);
 	}
 
-	perpslope = -(focus_X - xcoord)/(focus_Y - ycoord);
+	perpslope = -(focus_X - onCircle_X)/(focus_Y - onCircle_Y);
 
 	makeBubs = false;
 
@@ -59,26 +60,29 @@ function draw() {
 
 		greenCircle(0, 0);
 
-		bubbles[0].x = xcoord;
-		bubbles[0].y = ycoord;
+		bubbles[0].x = onCircle_X;
+		bubbles[0].y = onCircle_Y;
 		bubbles[0].show();
 
 		bubbles[1].x = midx;
 		bubbles[1].y = midy;
 		bubbles[1].show();
 
-		m2 = ycoord/xcoord;
-		newX = (perpslope * midx - midy)/(perpslope - m2);
+		radius_slope = onCircle_Y/onCircle_X;
+
+		newX = (perpslope * midx - midy)/(perpslope - radius_slope);
 		newY = perpslope * (newX - midx) + midy;
 
 		if (theta < Math.PI) {
-			phi = Math.atan(dist(xcoord, ycoord, midx, midy)/dist(newX, newY, midx, midy));
+			phi = Math.atan(dist(onCircle_X, onCircle_Y, midx, midy)/dist(newX, newY, midx, midy));
 		} else {
-			phi = -Math.atan(dist(xcoord, ycoord, midx, midy)/dist(newX, newY, midx, midy));
+			phi = -Math.atan(dist(onCircle_X, onCircle_Y, midx, midy)/dist(newX, newY, midx, midy));
 		}
 
-		tempX = xcoord - newX;
-		tempY = ycoord - newY;
+		phi = phi % (2 * Math.PI)
+
+		tempX = onCircle_X - newX;
+		tempY = onCircle_Y - newY;
 
 		// This conrols the animation when you click "Switch to Foci View or Switch to Radius View"
 		if (fociMode == false){
@@ -95,7 +99,7 @@ function draw() {
 				sigOutput = moveLine(sigInput, 5, -0.1, 2 * phi);
 				rotateBoi();
 			} else {
-				greyLine(0, 0, xcoord, ycoord);
+				greyLine(0, 0, onCircle_X, onCircle_Y);
 			}
 		}
 
