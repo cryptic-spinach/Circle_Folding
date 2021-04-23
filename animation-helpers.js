@@ -6,8 +6,8 @@ function sigmoidRotation(x, a, b, k) {
 function updateCoordinates(theta) {
 	onCircle_X = r * Math.sin(theta);
 	onCircle_Y = r * Math.cos(theta);
-	midx = (onCircle_X + focus_X)/2;
-	midy = (onCircle_Y + focus_Y)/2;
+	mid_X = (onCircle_X + focus_X)/2;
+	mid_Y = (onCircle_Y + focus_Y)/2;
 }
 
 function clearChordTrails() {
@@ -31,13 +31,13 @@ function windowResized() {
 function radiusToFociRotate() {
     var tempSigOutput = sigmoidOutput;
     
-    if (theta < 0 || theta > 2 * Math.PI ) {
-      tempSigOutput *= -1
+    if (Math.abs(theta) % (2 * Math.PI) > Math.PI ) {
+      tempSigOutput *= -1;
     }
   
-    translate(newX, newY);
+    translate(boundary_X, boundary_Y);
     rotate(tempSigOutput);
-    greyLine(0, 0, tempX, tempY);
+    greyLine(0, 0, temp_X, temp_Y);
     rotate(-tempSigOutput);
-    translate(-newX, -newY);
+    translate(-boundary_X, -boundary_Y);
   }

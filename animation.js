@@ -8,7 +8,7 @@ function draw() {
 
 	if (makeBubs == true) {
 		var b1 = new Bubble(onCircle_X, onCircle_Y, 8.5);
-		var b2 = new Bubble(midx, midy, 8.5);
+		var b2 = new Bubble(mid_X, mid_Y, 8.5);
 		var b3 = new Bubble(0, 0, 8.5);
 		bubbles.push(b1);
 		bubbles.push(b2);
@@ -21,7 +21,7 @@ function draw() {
 
 	if (manual) {
 		clearChordTrails();
-		chord(midx, midy, perpslope, r);
+		chord(mid_X, mid_Y, perpslope, r);
 		updateCoordinates(theta);
 
 		// sigmoidRotation gets confused when you use the arrow keys while rotation is inprogress
@@ -29,9 +29,11 @@ function draw() {
 		if (allowArrowKeys) {
 			if (keyIsDown(LEFT_ARROW)) {
 				theta += 0.02;
+				console.log(theta);
 			}
 			if (keyIsDown(RIGHT_ARROW)) {
 				theta -= 0.02;
+				console.log(theta);
 			}
 		}
 
@@ -43,25 +45,24 @@ function draw() {
 		bubbles[0].y = onCircle_Y;
 		bubbles[0].show();
 
-		bubbles[1].x = midx;
-		bubbles[1].y = midy;
+		bubbles[1].x = mid_X;
+		bubbles[1].y = mid_Y;
 		bubbles[1].show();
 
 		radius_slope = onCircle_Y/onCircle_X;
 
-		newX = (perpslope * midx - midy)/(perpslope - radius_slope);
-		newY = perpslope * (newX - midx) + midy;
+		boundary_X = (perpslope * mid_X - mid_Y)/(perpslope - radius_slope);
+		boundary_Y = perpslope * (boundary_X - mid_X) + mid_Y;
 
-		if (theta < Math.PI) {
-			phi = Math.atan(dist(onCircle_X, onCircle_Y, midx, midy)/dist(newX, newY, midx, midy));
+		// phi is the angle formed by point on circle, ellipse boundary point, and midpoint
+		if (theta > 0) {
+			phi = Math.atan(dist(onCircle_X, onCircle_Y, mid_X, mid_Y)/dist(boundary_X, boundary_Y, mid_X, mid_Y));
 		} else {
-			phi = -Math.atan(dist(onCircle_X, onCircle_Y, midx, midy)/dist(newX, newY, midx, midy));
+			phi = -Math.atan(dist(onCircle_X, onCircle_Y, mid_X, mid_Y)/dist(boundary_X, boundary_Y, mid_X, mid_Y));
 		}
 
-		phi = phi % (2 * Math.PI);
-
-		tempX = onCircle_X - newX;
-		tempY = onCircle_Y - newY;
+		temp_X = onCircle_X - boundary_X;
+		temp_Y = onCircle_Y - boundary_Y;
 
 		// This conrols the animation when you click "Switch to Foci View or Switch to Radius View"
 		if (fociMode == false){
@@ -71,7 +72,7 @@ function draw() {
 				sigmoidOutput = sigmoidRotation(sigmoidInput, 5, -0.1, 2 * phi);
 				radiusToFociRotate();
 			} else {
-				greyLine(focus_X, focus_Y, newX, newY);
+				greyLine(focus_X, focus_Y, boundary_X, boundary_Y);
 				allowArrowKeys = true;
 			}
 		} else {
@@ -86,18 +87,18 @@ function draw() {
 			}
 		}
 
-		bubbles[2].x = newX;
-		bubbles[2].y = newY;
+		bubbles[2].x = boundary_X;
+		bubbles[2].y = boundary_Y;
 		bubbles[2].show();
 
-		greyLine(0, 0, newX, newY);
+		greyLine(0, 0, boundary_X, boundary_Y);
 		purpleDot(0, 0);
 		orangeDot(focus_X, focus_Y);
 
 	} else { // Auto mode
 		theta += theta_speed;
 		theta = theta;
-		createChordTrails(midx, midy, perpslope);
+		createChordTrails(mid_X, mid_Y, perpslope);
 		greenCircle(0, 0);
 		purpleDot(0, 0);
 		purpleDot(focus_X, focus_Y);
