@@ -8,8 +8,8 @@ function dom_init() {
   text_boi = new Controls();
   gui = new dat.GUI();
 
-  toggle_button = gui.add(text_boi, 'AutoManualToggle').name('Switch to Auto mode');
-  rotate_button = gui.add(text_boi, 'RotateToggle').name('Switch to radius view');
+  toggle_button = gui.add(text_boi, 'AutoManualToggle').name('Switch to Auto Mode');
+  rotate_button = gui.add(text_boi, 'RotateToggle').name('Switch to Radius View');
 
 
 }
@@ -36,7 +36,6 @@ Controls = function() {
       clearChordTrails();
 			manual = false;
 			toggle_button.name('Switch to Manual Mode');
-			// gui.remove(theta_slider);
       gui.remove(rotate_button);
       clear_button = gui.add(text_boi, 'clearTrails').name('Clear Chord Trails');
 		} else if (manual == false) {

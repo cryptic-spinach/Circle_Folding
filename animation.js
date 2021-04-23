@@ -120,7 +120,7 @@ function draw() {
 	} else { // Auto mode
 		theta += theta_speed;
 		theta = theta;
-		autoChord(midx, midy, perpslope);
+		createChordTrails(midx, midy, perpslope);
 		greenCircle(0, 0);
 		purpleDot(0, 0);
 		purpleDot(focus_X, focus_Y);
@@ -130,20 +130,3 @@ function draw() {
 
 }
 
-function clearChordTrails() {
-	background(0);
-}
-
-function autoChord(midx, midy, perpslope) {
-	if (interval_track < chord_interval) {
-		interval_track += 1;
-	} else {
-		chord(midx, midy, perpslope, r);
-		interval_track = 0;
-	}
-}
-
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-	background(0);
-}

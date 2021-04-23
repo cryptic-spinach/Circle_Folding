@@ -1,17 +1,3 @@
-function radiusToFociRotate() {
-  var tempSigOutput = sigmoidOutput;
-  
-  if (theta < 0 || theta > 2 * Math.PI ) {
-    tempSigOutput *= -1
-  }
-
-  translate(newX, newY);
-  rotate(tempSigOutput);
-  greyLine(0, 0, tempX, tempY);
-  rotate(-tempSigOutput);
-  translate(-newX, -newY);
-}
-
 function greenCircle(x, y) {
   stroke(0, 128, 0);
   fill(0, 0, 0, 0);
@@ -29,8 +15,6 @@ function orangeDot(x, y) {
   fill(255, 165, 0)
   ellipse(x, y, 7.5);
 }
-
-
 
 function greyLine(x1, y1, x2, y2) {
   stroke(180);
