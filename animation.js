@@ -1,26 +1,3 @@
-var r = 250;
-var focus_X = 0;
-var focus_Y = 150;
-var makeBubs = true;
-var bubbles = [];
-var theta = 0.01;
-var onCircle_X = r * Math.sin(theta);
-var onCircle_Y = r * Math.cos(theta);
-var interval_track = 0;
-var chord_interval = 1;
-var theta_speed = 0.05;
-var manual = true;
-var phi;
-var radius_slope;
-var newX, newY;
-var tempX, tempY;
-var sigmoidInput = 0;
-var sigmoidOutput;
-var fociMode = false;
-var perpslope;
-var old_theta;
-var allowArrowKeys = false;
-
 function setup() {
 	dom_init();
 }

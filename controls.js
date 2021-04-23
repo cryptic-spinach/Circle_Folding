@@ -10,8 +10,6 @@ function dom_init() {
 
   toggle_button = gui.add(text_boi, 'AutoManualToggle').name('Switch to Auto Mode');
   rotate_button = gui.add(text_boi, 'RotateToggle').name('Switch to Radius View');
-
-
 }
 
 Controls = function() {
@@ -39,6 +37,8 @@ Controls = function() {
       gui.remove(rotate_button);
       clear_button = gui.add(text_boi, 'clearTrails').name('Clear Chord Trails');
 		} else if (manual == false) {
+      // Revert back to old theta
+      // This is needed for radiusToFociRotate to work properly 
       theta = old_theta;
       clearChordTrails();
 			manual = true;
