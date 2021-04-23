@@ -1,5 +1,5 @@
-function rotateBoi() {
-  var tempSigOutput = sigOutput;
+function radiusToFociRotate() {
+  var tempSigOutput = sigmoidOutput;
   
   if (theta < 0 || theta > 2 * Math.PI ) {
     tempSigOutput *= -1

@@ -11,10 +11,6 @@ function dom_init() {
   toggle_button = gui.add(text_boi, 'AutoManualToggle').name('Switch to Auto mode');
   rotate_button = gui.add(text_boi, 'RotateToggle').name('Switch to radius view');
 
-  // theta_slider = gui.add(text_boi, 'Theta', 0, 2 * Math.PI).name('Theta (arrow keys)');
-  // theta_slider.onChange(function(value) {
-  //   theta = value;
-  // });
 
 }
 
@@ -34,6 +30,9 @@ Controls = function() {
   }
   this.AutoManualToggle = function() {
 		if (manual == true) {
+      // Old theta is used to save the value of theta before switching to Auto
+      // This is needed for radiusToFociRotate to work properly 
+      old_theta = theta;
       clearChordTrails();
 			manual = false;
 			toggle_button.name('Switch to Manual Mode');
@@ -41,15 +40,12 @@ Controls = function() {
       gui.remove(rotate_button);
       clear_button = gui.add(text_boi, 'clearTrails').name('Clear Chord Trails');
 		} else if (manual == false) {
+      theta = old_theta;
       clearChordTrails();
 			manual = true;
 			toggle_button.name('Switch to Auto Mode');
       gui.remove(clear_button);
-			// theta_slider = gui.add(text_boi, 'Theta', 0, Math.PI * 2).name('Theta (arrow keys)');
-			// theta_slider.setValue(theta % (2 * Math.PI));
-			// theta_slider.onChange(function(value) {
-			// 	theta = value;
-			// });
+      
       if (fociMode == true) {
         rotate_button = gui.add(text_boi, 'RotateToggle').name('Switch to Foci View');
       } else if (fociMode == false) {

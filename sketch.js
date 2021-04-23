@@ -14,10 +14,12 @@ var phi;
 var radius_slope;
 var newX, newY;
 var tempX, tempY;
-var sigInput = 0;
-var sigOutput;
+var sigmoidInput = 0;
+var sigmoidOutput;
 var fociMode = false;
 var perpslope;
+var old_theta;
+var allowArrowKeys = false;
 
 function setup() {
 	dom_init();
@@ -44,16 +46,16 @@ function draw() {
 		clearChordTrails();
 		chord(midx, midy, perpslope, r);
 		updateCoordinates(theta);
-		// theta_slider.setValue(theta);
 
-		if (keyIsDown(LEFT_ARROW)) {
-			theta += 0.02;
-			console.log(theta)
-			// theta_slider.setValue(theta);
-		}
-		if (keyIsDown(RIGHT_ARROW)) {
-			theta -= 0.02;
-			// theta_slider.setValue(theta);
+		// sigmoidRotation gets confused when you use the arrow keys while rotation is inprogress
+		// so prevent that scenario here
+		if (allowArrowKeys) {
+			if (keyIsDown(LEFT_ARROW)) {
+				theta += 0.02;
+			}
+			if (keyIsDown(RIGHT_ARROW)) {
+				theta -= 0.02;
+			}
 		}
 
 		updateCoordinates(theta);
@@ -79,27 +81,31 @@ function draw() {
 			phi = -Math.atan(dist(onCircle_X, onCircle_Y, midx, midy)/dist(newX, newY, midx, midy));
 		}
 
-		phi = phi % (2 * Math.PI)
+		phi = phi % (2 * Math.PI);
 
 		tempX = onCircle_X - newX;
 		tempY = onCircle_Y - newY;
 
 		// This conrols the animation when you click "Switch to Foci View or Switch to Radius View"
 		if (fociMode == false){
-			if (sigInput <= 100) {
-				sigInput += 1;
-				sigOutput = moveLine(sigInput, 5, -0.1, 2 * phi);
-				rotateBoi();
+			if (sigmoidInput <= 100) {
+				allowArrowKeys = false;
+				sigmoidInput += 1;
+				sigmoidOutput = sigmoidRotation(sigmoidInput, 5, -0.1, 2 * phi);
+				radiusToFociRotate();
 			} else {
-				greyLine(focus_X, focus_Y, newX, newY)
+				greyLine(focus_X, focus_Y, newX, newY);
+				allowArrowKeys = true;
 			}
 		} else {
-			if (sigInput >= 0) {
-				sigInput -= 1;
-				sigOutput = moveLine(sigInput, 5, -0.1, 2 * phi);
-				rotateBoi();
+			if (sigmoidInput >= 0) {
+				allowArrowKeys = false;
+				sigmoidInput -= 1;
+				sigmoidOutput = sigmoidRotation(sigmoidInput, 5, -0.1, 2 * phi);
+				radiusToFociRotate();
 			} else {
 				greyLine(0, 0, onCircle_X, onCircle_Y);
+				allowArrowKeys = true;
 			}
 		}
 
