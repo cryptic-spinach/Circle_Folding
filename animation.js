@@ -29,11 +29,11 @@ function draw() {
 		if (allowArrowKeys) {
 			if (keyIsDown(LEFT_ARROW)) {
 				theta += 0.02;
-				console.log(theta);
+				
 			}
 			if (keyIsDown(RIGHT_ARROW)) {
 				theta -= 0.02;
-				console.log(theta);
+				
 			}
 		}
 

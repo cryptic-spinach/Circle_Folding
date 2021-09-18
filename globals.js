@@ -1,5 +1,5 @@
 // Radius of the main circle
-var r = 200;
+var r = 175;
 
 // This is the noncenter focus of the ellipse
 var focus_X = 0;
