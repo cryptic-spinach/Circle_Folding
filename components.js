@@ -1,7 +1,7 @@
 function greenCircle(x, y) {
   stroke(0, 128, 0);
   fill(0, 0, 0, 0);
-  ellipse(x, y, 500);
+  ellipse(x, y, r * 2);
 }
 
 function purpleDot(x, y) {
