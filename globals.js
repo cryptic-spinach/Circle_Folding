@@ -19,7 +19,7 @@ var makeBubs = true;
 var bubbles = [];
 
 // Angle formed in the center of the main circle measured counterclockwise from the downward y direction.
-var theta = 0.01;
+var theta = 4;
 
 // This is the point that lies on the circle
 var onCircle_X = r * Math.sin(theta);

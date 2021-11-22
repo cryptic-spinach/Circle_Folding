@@ -1,3 +1,16 @@
+function addHint() {
+  stroke('#BBBBBB');
+	fill('#BBBBBB');
+	textFont('Helvetica')
+
+	let y_offset = -50;
+	let x_offset = 110;
+	textSize(22);
+	text('Use the left and', -(r + x_offset), (r + y_offset));
+	text('right arrow keys', -(r + x_offset), (r + y_offset + 25));
+	text('to move the chord', -(r + x_offset), (r + y_offset + 50));
+}
+
 function greenCircle(x, y) {
   stroke(0, 128, 0);
   fill(0, 0, 0, 0);

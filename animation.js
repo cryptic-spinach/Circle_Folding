@@ -6,6 +6,9 @@ function draw() {
 	translate(windowWidth/2, windowHeight/2);
 	updateCoordinates(theta);
 
+
+	
+
 	if (makeBubs == true) {
 		var b1 = new Bubble(onCircle_X, onCircle_Y, 8.5);
 		var b2 = new Bubble(mid_X, mid_Y, 8.5);
@@ -95,6 +98,8 @@ function draw() {
 		purpleDot(0, 0);
 		orangeDot(focus_X, focus_Y);
 
+		addHint();
+		
 	} else { // Auto mode
 		theta += theta_speed;
 		theta = theta;
