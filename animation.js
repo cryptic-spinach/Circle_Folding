@@ -97,8 +97,6 @@ function draw() {
 		greyLine(0, 0, boundary_X, boundary_Y);
 		purpleDot(0, 0);
 		orangeDot(focus_X, focus_Y);
-
-		addHint();
 		
 	} else { // Auto mode
 		theta += theta_speed;
