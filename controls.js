@@ -7,6 +7,7 @@ function dom_init() {
   // Implement GUI controls
   text_boi = new Controls();
   gui = new dat.GUI();
+  gui.width = 400;
 
   toggle_button = gui.add(text_boi, 'AutoManualToggle').name('Switch to Auto Mode');
   rotate_button = gui.add(text_boi, 'RotateToggle').name('Switch to Radius View');
@@ -28,18 +29,12 @@ Controls = function() {
   }
   this.AutoManualToggle = function() {
 		if (manual == true) {
-      // Old theta is used to save the value of theta before switching to Auto
-      // This is needed for radiusToFociRotate to work properly 
-      old_theta = theta;
       clearChordTrails();
 			manual = false;
 			toggle_button.name('Switch to Manual Mode');
       gui.remove(rotate_button);
       clear_button = gui.add(text_boi, 'clearTrails').name('Clear Chord Trails');
 		} else if (manual == false) {
-      // Revert back to old theta
-      // This is needed for radiusToFociRotate to work properly 
-      theta = old_theta;
       clearChordTrails();
 			manual = true;
 			toggle_button.name('Switch to Auto Mode');
