@@ -7,7 +7,7 @@ function dom_init() {
   // Implement GUI controls
   text_boi = new Controls();
   gui = new dat.GUI();
-  gui.width = 400;
+  gui.width = 350;
 
   toggle_button = gui.add(text_boi, 'AutoManualToggle').name('Switch to Auto Mode');
   rotate_button = gui.add(text_boi, 'RotateToggle').name('Switch to Radius View');
